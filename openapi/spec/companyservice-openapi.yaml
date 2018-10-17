@@ -1,0 +1,129 @@
+---
+swagger: "2.0"
+info:
+  description: "No description"
+  version: "1.0.0"
+  title: "CompanyService"
+  contact: {}
+host: "company-service.hp"
+basePath: "/company"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /api/v1/companies:
+    get:
+      summary: "List"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/PageCompanies"
+        400:
+          description: "Status 400"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Status 500"
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      summary: "Create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CompanyCreateForm"
+      responses:
+        201:
+          description: "Status 201"
+          schema:
+            $ref: "#/definitions/Company"
+        400:
+          description: "Status 400"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Status 500"
+          schema:
+            $ref: "#/definitions/Error"
+  /api/v1/companies/{company_id}:
+    get:
+      summary: "Get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/Company"
+        400:
+          description: "Status 400"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "Status 404"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Status 500"
+          schema:
+            $ref: "#/definitions/Error"
+    parameters:
+    - name: "company_id"
+      in: "path"
+      required: true
+      type: "string"
+definitions:
+  PageCompanies:
+    type: "object"
+    properties:
+      elements:
+        type: "array"
+        items:
+          $ref: "#/definitions/Company"
+      limit:
+        type: "string"
+      count:
+        type: "string"
+      offset:
+        type: "string"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      message:
+        type: "string"
+  Company:
+    type: "object"
+    properties:
+      company_id:
+        type: "string"
+      company_name:
+        type: "string"
+      products:
+        type: "array"
+        items:
+          type: "object"
+      meta:
+        type: "object"
+  CompanyCreateForm:
+    type: "object"
+    required:
+    - "company_name"
+    properties:
+      company_name:
+        type: "string"

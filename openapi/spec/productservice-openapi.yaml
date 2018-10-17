@@ -1,0 +1,127 @@
+---
+swagger: "2.0"
+info:
+  description: "No description"
+  version: "1.0.0"
+  title: "ProductService"
+  contact: {}
+host: "product-service.hp"
+basePath: "/product"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /api/v1/products:
+    get:
+      summary: "List"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "company_id"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/PageProducts"
+        400:
+          description: "Status 400"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Status 500"
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      summary: "Create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductCreateForm"
+      responses:
+        201:
+          description: "Status 201"
+          schema:
+            $ref: "#/definitions/Product"
+        400:
+          description: "Status 400"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Status 500"
+          schema:
+            $ref: "#/definitions/Error"
+  /api/v1/products/{product_id}:
+    get:
+      summary: "Get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/Product"
+        400:
+          description: "Status 400"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Status 500"
+          schema:
+            $ref: "#/definitions/Error"
+    parameters:
+    - name: "product_id"
+      in: "path"
+      required: true
+      type: "string"
+definitions:
+  PageProducts:
+    type: "object"
+    properties:
+      limit:
+        type: "string"
+      offset:
+        type: "string"
+      count:
+        type: "string"
+      elements:
+        type: "array"
+        items:
+          $ref: "#/definitions/Product"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      message:
+        type: "string"
+  ProductCreateForm:
+    type: "object"
+    properties:
+      product_name:
+        type: "string"
+      company_id:
+        type: "string"
+  Product:
+    type: "object"
+    properties:
+      product_id:
+        type: "string"
+      product_name:
+        type: "string"
+      meta:
+        type: "object"
+      company_id:
+        type: "string"
