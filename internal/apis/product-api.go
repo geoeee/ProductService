@@ -23,19 +23,19 @@ func init() {
 	products = make(map[string]*genModels.Product)
 	p1 := &genModels.Product{
 		ProductID:   "31577e70-9d4c-441a-9210-b3e5471af3ff",
-		CompanyID:   "1",
+		CompanyID:   "86cf1699-00d3-494a-a49f-ec5230b0fadd",
 		ProductName: "p1",
 	}
 	products[p1.ProductID] = p1
 	p2 := &genModels.Product{
 		ProductID:   "190e8697-15cd-4590-a304-99303d7a7cbf",
-		CompanyID:   "2",
+		CompanyID:   "39266573-0f22-47fc-bac1-39ea8a351c72",
 		ProductName: "p2",
 	}
 	products[p2.ProductID] = p2
 	p3 := &genModels.Product{
 		ProductID:   "b5863fd4-8eea-4c94-bdb4-ce8ed3fbcdc7",
-		CompanyID:   "3",
+		CompanyID:   "3718a69f-e5f7-4395-9f61-1cc5680f5396",
 		ProductName: "p3",
 	}
 	products[p3.ProductID] = p3
